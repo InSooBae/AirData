@@ -4,20 +4,20 @@ import db.Air;
 
 // CAI 계산 클래스
 public class Cai {
-	final static double[] so2L = {0,0.021,0.051,0.151};
-	final static double[] so2H = {0.02,0.05,0.15,1};
-	final static double[] coL = {0,2.01,9.01,15.01};
-	final static double[] coH = {2,9,15,50};
-	final static double[] o3L = {0,0.031,0.091,0.151};
-	final static double[] o3H = {0.03,0.09,0.15,0.6};
-	final static double[] no2L = {0,0.031,0.061,0.201};
-	final static double[] no2H = {0.03,0.06,0.2,2};
-	final static int[] pm10L = {0,31,81,151};
-	final static int[] pm10H = {30,80,150,600};
-	final static int[] pm25L = {0,16,36,76};
-	final static int[] pm25H = {15,35,75,500};
-	final static int [] iL = {0,51,101,251};
-	final static int [] iH = {50,100,250,500};
+	final static double[] SO2L = {0,0.021,0.051,0.151};
+	final static double[] SO2H = {0.02,0.05,0.15,1};
+	final static double[] COL = {0,2.01,9.01,15.01};
+	final static double[] COH = {2,9,15,50};
+	final static double[] O3L = {0,0.031,0.091,0.151};
+	final static double[] O3H = {0.03,0.09,0.15,0.6};
+	final static double[] NO2L = {0,0.031,0.061,0.201};
+	final static double[] NO2H = {0.03,0.06,0.2,2};
+	final static int[] PM10L = {0,31,81,151};
+	final static int[] PM10H = {30,80,150,600};
+	final static int[] PM25L = {0,16,36,76};
+	final static int[] PM25H = {15,35,75,500};
+	final static int [] IL = {0,51,101,251};
+	final static int [] IH = {50,100,250,500};
 	private final double NO2;
 	private final double O3;
 	private final double CO;
@@ -36,30 +36,30 @@ public class Cai {
 		double so2;
 		int i=0;
 		for (i=0; i<4; i++) {
-			if(SO2>=so2L[i] && SO2<=so2H[i])
+			if(SO2>=SO2L[i] && SO2<=SO2H[i])
 				break;
 		}
-		so2=(iH[i]-iL[i])/(so2H[i]-so2L[i])*(SO2-so2L[i])+iL[i];
+		so2=(IH[i]-IL[i])/(SO2H[i]-SO2L[i])*(SO2-SO2L[i])+IL[i];
 		return (int)so2;
 	}
 	public int getCOCai() {
 		double co;
 		int i=0;
 		for (i=0; i<4; i++) {
-			if(CO>=coL[i] && CO<=coH[i])
+			if(CO>=COL[i] && CO<=COH[i])
 				break;
 		}
-		co=(iH[i]-iL[i])/(coH[i]-coL[i])*(CO-coL[i])+iL[i];
+		co=(IH[i]-IL[i])/(COH[i]-COL[i])*(CO-COL[i])+IL[i];
 		return (int)co;
 	}
 	public int getO3Cai() {
 		double o3;
 		int i=0;
 		for (i=0; i<4; i++) {
-			if(O3>=o3L[i] && O3<=o3H[i])
+			if(O3>=O3L[i] && O3<=O3H[i])
 				break;
 		}
-		o3=(iH[i]-iL[i])/(o3H[i]-o3L[i])*(O3-o3L[i])+iL[i];
+		o3=(IH[i]-IL[i])/(O3H[i]-O3L[i])*(O3-O3L[i])+IL[i];
 		return (int)o3;
 	}
 
@@ -67,10 +67,10 @@ public class Cai {
 		double no2;
 		int i=0;
 		for (i=0; i<4; i++) {
-			if(NO2>=no2L[i] && NO2<=no2H[i])
+			if(NO2>=NO2L[i] && NO2<=NO2H[i])
 				break;
 		}
-		no2=(iH[i]-iL[i])/(no2H[i]-no2L[i])*(NO2-no2L[i])+iL[i];
+		no2=(IH[i]-IL[i])/(NO2H[i]-NO2L[i])*(NO2-NO2L[i])+IL[i];
 		return (int)no2;
 	}
 	// 미세먼지 구간부터 계산법이 바뀌어서 대략적인 계산함. (오차범위 존재)
@@ -78,12 +78,12 @@ public class Cai {
 		double pm10;
 		int i=0;
 		for (i=0; i<4;i++ ) {
-			if(PM10>=pm10L[i] && PM10<=pm10H[i])
+			if(PM10>=PM10L[i] && PM10<=PM10H[i])
 				break;
 			
 		}
 		
-		pm10=(double)(iH[i]-iL[i])/(double)(pm10H[i]-pm10L[i])*(((double)PM10*0.8)-pm10L[i])+iL[i];
+		pm10=(double)(IH[i]-IL[i])/(double)(PM10H[i]-PM10L[i])*(((double)PM10*0.8)-PM10L[i])+IL[i];
 
 		return (int) Math.round(pm10);
 	}
@@ -92,12 +92,12 @@ public class Cai {
 			double pm25;
 			int i=0;
 			for (i=0; i<4;i++ ) {
-				if(PM25>=pm25L[i] && PM25<=pm25H[i])
+				if(PM25>=PM25L[i] && PM25<=PM25H[i])
 					break;
 				
 			}
 			
-			pm25=(double)(iH[i]-iL[i])/(double)(pm25H[i]-pm25L[i])*(((double)PM25*0.8)-pm25L[i])+iL[i];
+			pm25=(double)(IH[i]-IL[i])/(double)(PM25H[i]-PM25L[i])*(((double)PM25*0.8)-PM25L[i])+IL[i];
 		
 			return (int) Math.round(pm25);
 		}
