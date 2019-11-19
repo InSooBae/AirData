@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import airdata.Cai;
+
 
 
 
@@ -21,7 +23,10 @@ public class AirData {
     private static final String PASSWORD = "qodlstn12";
     // mysql은 "jdbc:mysql://localhost/사용할db이름" 이다.
     private static final String URL = "jdbc:mysql://localhost/airdata?useSSL=false&&serverTimezone=UTC";
-
+    //gui 좌표
+    private static final int[][] POSITION = {
+            {385, 496, 328, 87, 242, 420, 115, 182, 405, 355, 375, 240, 196, 240, 320, 360, 333, 450, 127, 190, 285, 225, 285, 299, 427},
+            {403, 315, 183, 293, 437, 317, 390, 435, 167, 147, 273, 382, 300, 273, 415, 315, 242, 450, 351, 363, 337, 215, 263, 300, 249}};
 
     public AirData() {
     	// Connection 객체를 자동완성으로 import할 때는 com.mysql.connection이 아닌
@@ -218,19 +223,23 @@ public class AirData {
     	}
     	return list;
     }
-    
+    //%로(마지막 OO로 끝나는 지역 안나옴) 
     public List<Air> getSelectYMData(String ymDate) {
     	String sql =null;
     	Statement stmt = null;
     	List<Air> list = new ArrayList<Air>();
+    	//count
+    	int count=0;
     	try {
     		StringBuilder sb = new StringBuilder();
-    		sql=sb.append("SELECT * FROM air where ymDate=")
+    		sql=sb.append("SELECT * FROM air WHERE ymDate=")
     		.append(ymDate)
+    		.append(" AND NOT loc_name LIKE '%로' ")
     		.append(";").toString();
     		stmt=conn.createStatement();
     		ResultSet rs =stmt.executeQuery(sql);
     		while(rs.next()) {
+    			
     			Air air = new Air();
     			air.setYmDate(rs.getString("ymDate"));
     			air.setLoc_name(rs.getString("loc_name"));
@@ -240,6 +249,8 @@ public class AirData {
     			air.setSo2p(rs.getDouble("so2p"));
     			air.setPm10(rs.getInt("pm10"));
     			air.setPm25(rs.getInt("pm25"));
+    			air.setX(POSITION[0][count]);
+    			air.setY(POSITION[1][count++]);
     			list.add(air);
     		}
     	} catch(SQLException e) {
@@ -277,13 +288,10 @@ public class AirData {
 		AirData a= new AirData();
 		List<Air> list=a.getSelectYMData("20180101");
 		for (Air tmp: list) {
-			System.out.println("지역이름 "+tmp.getLoc_name());
-			System.out.println("No2p "+tmp.getNo2p());
-			System.out.println("O3p "+tmp.getO3p());
-			System.out.println("Pm10 "+tmp.getPm10());
-			System.out.println("Pm25 "+tmp.getPm25());
-			System.out.println("So2p "+tmp.getSo2p());
-			System.out.println("Cop "+tmp.getCop());
+			Cai f = new Cai(tmp);
+			System.out.println(tmp.getLoc_name());
+			System.out.println(tmp.getX());
+			System.out.println(tmp.getY());
 		}
 	}
 

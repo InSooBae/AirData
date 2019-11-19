@@ -9,6 +9,8 @@ public class Air {
 	private double so2p;
 	private int pm10;
 	private int pm25;
+	private int x;
+	private int y;
 	
 	public void setYmDate(String ymDate) {
 		this.ymDate=ymDate;
@@ -71,5 +73,21 @@ public class Air {
 	
 	public int getPm25() {
 		return pm25;
+	}
+	
+	public void setX(int x) {
+		this.x=x;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public void setY(int y) {
+		this.y=y;
+	}
+	
+	public int getY() {
+		return y;
 	}
 }
