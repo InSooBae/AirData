@@ -4,20 +4,20 @@ import db.Air;
 
 // CAI 계산 클래스
 public class Cai {
-	final static double[] SO2L = {0,0.021,0.051,0.151};
-	final static double[] SO2H = {0.02,0.05,0.15,1};
-	final static double[] COL = {0,2.01,9.01,15.01};
-	final static double[] COH = {2,9,15,50};
-	final static double[] O3L = {0,0.031,0.091,0.151};
-	final static double[] O3H = {0.03,0.09,0.15,0.6};
-	final static double[] NO2L = {0,0.031,0.061,0.201};
-	final static double[] NO2H = {0.03,0.06,0.2,2};
-	final static int[] PM10L = {0,31,81,151};
-	final static int[] PM10H = {30,80,150,600};
-	final static int[] PM25L = {0,16,36,76};
-	final static int[] PM25H = {15,35,75,500};
-	final static int [] IL = {0,51,101,251};
-	final static int [] IH = {50,100,250,500};
+	private final static double[] SO2L = {0,0.021,0.051,0.151};
+	private final static double[] SO2H = {0.02,0.05,0.15,1};
+	private final static double[] COL = {0,2.01,9.01,15.01};
+	private final static double[] COH = {2,9,15,50};
+	private final static double[] O3L = {0,0.031,0.091,0.151};
+	private final static double[] O3H = {0.03,0.09,0.15,0.6};
+	private final static double[] NO2L = {0,0.031,0.061,0.201};
+	private final static double[] NO2H = {0.03,0.06,0.2,2};
+	private final static int[] PM10L = {0,31,81,151};
+	private final static int[] PM10H = {30,80,150,600};
+	private final static int[] PM25L = {0,16,36,76};
+	private final static int[] PM25H = {15,35,75,500};
+	private final static int [] IL = {0,51,101,251};
+	private final static int [] IH = {50,100,250,500};
 	private final double NO2;
 	private final double O3;
 	private final double CO;
