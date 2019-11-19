@@ -15,15 +15,13 @@
 
 
 ### air
-+----------+--------------+------+-----+---------+-------+
-| Field    | Type         | Null | Key | Default | Extra |
-+----------+--------------+------+-----+---------+-------+
-| ymDate   | varchar(8)   | NO   | PRI | NULL    |       |
-| loc_name | varchar(20)  | NO   | PRI | NULL    |       |
-| no2p     | decimal(4,3) | YES  |     | NULL    |       |
-| o3p      | decimal(4,3) | YES  |     | NULL    |       |
-| cop      | decimal(2,1) | YES  |     | NULL    |       |
-| so2p     | decimal(4,3) | YES  |     | NULL    |       |
-| pm10     | decimal(4,0) | YES  |     | NULL    |       |
-| pm25     | decimal(4,0) | YES  |     | NULL    |       |
-+----------+--------------+------+-----+---------+-------+
+
+- Filed		| Type 		| Null | Key | Default | Extra
+- ymDate	varchar(8)	   No	PRI		NULL
+- loc_name	varchar(20)	   No   PRI		NULL
+- no2p		decimal(4,3)   YES	   		NULL
+- o3p		decimal(4,3)   YES	   		NULL
+- cop		decimal(2,1)   YES	   		NULL
+- so2p		decimal(4,3)   YES	   		NULL
+- pm10		decimal(4)	   YES	   		NULL
+- pm25		decimal(4)	   YES	   		NULL
