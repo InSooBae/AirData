@@ -16,7 +16,7 @@ public class Csv {
         BufferedReader br = null;
         
         try{
-            br = Files.newBufferedReader(Paths.get("/Users/baeinsu/Downloads/AirData2018.CSV"));
+            br = Files.newBufferedReader(Paths.get("resource/AirData2018.CSV"));
             //UTF-8 로 변환해야 오류 안남
             Charset.forName("UTF-8");
             String line = "";

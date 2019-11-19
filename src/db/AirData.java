@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import airdata.Cai;
+
 
 
 
@@ -288,7 +288,6 @@ public class AirData {
 		AirData a= new AirData();
 		List<Air> list=a.getSelectYMData("20180101");
 		for (Air tmp: list) {
-			Cai f = new Cai(tmp);
 			System.out.println(tmp.getLoc_name());
 			System.out.println(tmp.getX());
 			System.out.println(tmp.getY());
