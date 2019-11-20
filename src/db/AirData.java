@@ -26,7 +26,7 @@ public class AirData {
     //gui 좌표
     private static final int[][] POSITION = {
             {385, 496, 328, 87, 242, 420, 115, 182, 405, 355, 375, 240, 196, 240, 320, 360, 333, 450, 127, 190, 285, 225, 285, 299, 427},
-            {403, 315, 183, 293, 437, 317, 390, 435, 167, 147, 273, 382, 300, 273, 415, 315, 242, 450, 351, 363, 337, 215, 263, 300, 249}};
+            {403, 315, 183, 293, 437, 317, 390, 435, 167, 147, 273, 382, 300, 273, 415, 315, 242, 380, 351, 363, 337, 215, 263, 300, 249}};
 
     public AirData() {
     	// Connection 객체를 자동완성으로 import할 때는 com.mysql.connection이 아닌
@@ -303,11 +303,12 @@ public class AirData {
 	public static void main(String[] args) {
 		AirData a= new AirData();
 		a.insertAirData();
-		List<Air> list=a.getSelectYMData("20180101");
+		List<Air> list=a.getSelectYMData("20180116");
 		for (Air tmp: list) {
 			System.out.println(tmp.getLoc_name());
 			System.out.println(tmp.getX());
 			System.out.println(tmp.getY());
+			System.out.println(tmp.getNo2p());
 		}
 	}
 
