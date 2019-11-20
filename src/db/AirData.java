@@ -104,8 +104,23 @@ public class AirData {
     	}
 	
     }
-
+    public boolean isExistData() {
+    	String sql = "select exists (select * from air where ymDate='20180101') as success;";
+    	Statement stmt = null;
+    	boolean exist = true;
+    	try {
+    		stmt = conn.createStatement();
+    		//if exist return 1; else return 0
+    		exist = stmt.execute(sql);
+    	} catch(SQLException e) {
+    		e.printStackTrace();	
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return exist;
+    }
     public void insertAirData() {
+    	if(isExistData()==false) {
        String sql = "insert into air(ymDate,loc_name,no2p,o3p,cop,so2p,pm10,pm25) values(?,?,?,?,?,?,?,?)";
        //쿼리 실행시 단계 1)쿼리 문장 분석 -> 2)컴파일 -> 3)실행
        //Statement를 사용하면 매번 쿼리 수행할때 마다 위 3단계를 거치고(한번 이용할시)
@@ -187,6 +202,7 @@ public class AirData {
            }
        }
        System.out.println("FIN");
+    	}
     }
 
     public List<Air> getAllAirData() {
@@ -286,6 +302,7 @@ public class AirData {
 
 	public static void main(String[] args) {
 		AirData a= new AirData();
+		a.insertAirData();
 		List<Air> list=a.getSelectYMData("20180101");
 		for (Air tmp: list) {
 			System.out.println(tmp.getLoc_name());
