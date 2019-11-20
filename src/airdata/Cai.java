@@ -101,5 +101,26 @@ public class Cai {
 		
 			return (int) Math.round(pm25);
 		}
-	
+		//통합 대기 지수.
+		public int getCAI() {
+			int[] arr = {getSO2Cai(),
+			getNO2Cai(),
+			getCOCai(),
+			getO3Cai(),
+			getPM10Cai(),
+			getPM25Cai()};
+			int res=0;
+			int count=0;
+			for(int i= 0;i<6;i++ ) {
+				if(arr[i]>101)
+					count++;
+				if(res<arr[i])
+					res=arr[i];
+			}
+			if(count==2)
+				res+=50;
+			else if(count>=3)
+				res+=75;
+			return res;
+		}
 }

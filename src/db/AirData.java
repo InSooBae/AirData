@@ -88,7 +88,7 @@ public class AirData {
 				.append("loc_name varchar(20) not null,")
 				.append("no2p decimal(4,3),")
 				.append("o3p decimal(4,3),")
-				.append("co2p decimal(2,1),")
+				.append("cop decimal(2,1),")
 				.append("so2p decimal(4,3),")
 				.append("pm10 decimal(4),")
 				.append("pm25 decimal(4)")
