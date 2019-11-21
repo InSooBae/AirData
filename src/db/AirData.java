@@ -300,16 +300,6 @@ public class AirData {
 //    return d;
 //}
 
-	public static void main(String[] args) {
-		AirData a= new AirData();
-		a.insertAirData();
-		List<Air> list=a.getSelectYMData("20180116");
-		for (Air tmp: list) {
-			System.out.println(tmp.getLoc_name());
-			System.out.println(tmp.getX());
-			System.out.println(tmp.getY());
-			System.out.println(tmp.getNo2p());
-		}
-	}
+	
 
 }

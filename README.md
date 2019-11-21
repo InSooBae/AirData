@@ -9,7 +9,10 @@
 - [x] Calculate AirData to CAI
 - [x] Send select by ymDate of DB data
 
+
 ## API Lists
+- mysql-connector-java-8.0.18.jar
+- mail-1.4.7.jar
 
 ### departments
 

@@ -105,8 +105,5 @@ public class DateChoice extends JFrame {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 
-   public static void main(String[] args) {
-      DateChoice com = new DateChoice();
-   }
 
 }
