@@ -91,7 +91,8 @@ public class AirData {
 				.append("cop decimal(2,1),")
 				.append("so2p decimal(4,3),")
 				.append("pm10 decimal(4),")
-				.append("pm25 decimal(4)")
+				.append("pm25 decimal(4),")
+				.append("primary key(ymDate,loc_name)")
 				.append(");").toString();
 		
 		//테이블 생성, 수정 ,삭제 등 db관리 명령어에 사용
