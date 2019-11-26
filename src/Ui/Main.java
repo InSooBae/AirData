@@ -56,14 +56,6 @@ public class Main extends JFrame {
 		};
 		emailbutton.addActionListener(emailbuttonListener);
 
-		comparebutton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				Compare compare = new Compare();
-			}
-			
-		});
-		
 		p.add(daylabel);
 		p.add(daybutton);
 		p.add(comparelabel);
