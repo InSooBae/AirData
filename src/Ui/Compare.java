@@ -21,7 +21,7 @@ import db.Air;
 public class Compare extends JFrame{
 	
 	Compare(){
-		setTitle("��� ������ ��");
+		setTitle("대기지수 비교");
 		Container c = getContentPane();
 		c.setLayout(new FlowLayout());
 		JPanel jp1 = new JPanel();
@@ -29,19 +29,19 @@ public class Compare extends JFrame{
 		jp1.setLayout(new GridLayout(6,2));
 		jp2.setLayout(new GridLayout(1, 2));
 		
-		JLabel inno2p = new JLabel("no2p�� �Է��ϼ���.");
-		JLabel ino3p = new JLabel("o3p�� �Է��ϼ���.");
-		JLabel incop = new JLabel("cop�� �Է��ϼ���.");
-		JLabel inso2p = new JLabel("so2p�� �Է��ϼ���.");
-		JLabel inpm10 = new JLabel("pm10�� �Է��ϼ���.");
-		JLabel inpm25 = new JLabel("pm25�� �Է��ϼ���.");
+		JLabel inno2p = new JLabel("no2p의 값을 입력하세요.");
+		JLabel ino3p = new JLabel("o3p의 값을 입력하세요.");
+		JLabel incop = new JLabel("cop의 값을 입력하세요.");
+		JLabel inso2p = new JLabel("so2p의 값을 입력하세요.");
+		JLabel inpm10 = new JLabel("pm10의 값을 입력하세요.");
+		JLabel inpm25 = new JLabel("pm25의 값을 입력하세요.");
 		JTextField inputNo2p = new JTextField();
 		JTextField inputO3p = new JTextField();
 		JTextField inputCop = new JTextField();
 		JTextField inputSo2p = new JTextField();
 		JTextField inputPm10 = new JTextField();
 		JTextField inputPm25 = new JTextField();
-		JButton comp = new JButton("�Էµ� �����Ϳ�  2018�� ������ ���ϱ�");
+		JButton comp = new JButton("입력한 값과  2018년 대기지수 비교하기!");
 		
 		jp1.add(inno2p);
 		jp1.add(inputNo2p);

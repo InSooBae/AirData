@@ -28,6 +28,10 @@ public class Map extends JFrame {
    String imageurlYellow = "resource/yellowcircle.png";
    String imageurlRed = "resource/redcircle.png";
    String imageurlMap = "resource/map.png";
+   JButton[] buttons = new JButton[25];
+   int[] color = new int[25];
+   int i = 0;
+	
    
    Map(List<Air> airList, String month, String date){
       
@@ -66,7 +70,9 @@ public class Map extends JFrame {
          
          x = a.getX();
          y = a.getY();
-         imagepanel.add(setJButton(cai, a, month, date, x, y, cai.getCAI()));   
+         buttons[i] = setJButton(cai, a, month, date, x, y, cai.getCAI(), i);
+         imagepanel.add(buttons[i]);
+		 i++;  
       }
       
       setSize(800, 700);
@@ -87,33 +93,89 @@ public class Map extends JFrame {
       
       
       jck1.addItemListener(new ItemListener() {
-         public void itemStateChanged(ItemEvent e) {
-            if(e.getStateChange()==1)
-               System.out.println("1번선택");
-         }
-         
-      });
-      
-      
-   }
-   
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==1)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==1)
+							buttons[b].setVisible(false);
+						}
+					}
+			});
+		jck2.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==2)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==2)
+							buttons[b].setVisible(false);
+						}
+					}
+			});	
+		jck3.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==3)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==3)
+							buttons[b].setVisible(false);
+						}
+					}
+			});	
+		jck4.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==4){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==1)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==4)
+							buttons[b].setVisible(false);
+						}
+					}
+			});	
+	}
 
-
-   public ImageIcon setImageIcon(int CAI){
+   public ImageIcon setImageIcon(int CAI, int i){
       String imageurl;
       Image originimg = null;
       Image changeimg = null;
       ImageIcon changeicon;
       
-      if( 0 < CAI && CAI <= 50)
+      if( 0 < CAI && CAI <= 50) {
          imageurl = imageurlGreen;
-      else if(50 < CAI && CAI <= 100)
+         color[i]=1;
+      }
+      else if(50 < CAI && CAI <= 100) {
          imageurl = imageurlBlue;
-      else if(100 < CAI && CAI <= 250)
+         color[i]=2;
+      }
+      else if(100 < CAI && CAI <= 250) {
          imageurl = imageurlYellow;
-      else
+         color[i]=3;  
+      }
+      else {
          imageurl = imageurlRed;
-      
+         color[i]=4;
+      }
       ImageIcon origin = new ImageIcon(imageurl);
       originimg = origin.getImage();
       changeimg = originimg.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -123,9 +185,9 @@ public class Map extends JFrame {
    }
    
    
-   public JButton setJButton(Cai cai, Air a, String month, String date, int x, int y, int CAI) {
+   public JButton setJButton(Cai cai, Air a, String month, String date, int x, int y, int CAI, int i) {
       
-      JButton setbtn = new JButton(setImageIcon(CAI));
+      JButton setbtn = new JButton(setImageIcon(CAI, i));
       setbtn.setBounds(x, y, 40, 40);
       setbtn.setBorderPainted(false);
       setbtn.setContentAreaFilled(false);

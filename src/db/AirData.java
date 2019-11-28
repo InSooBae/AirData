@@ -106,13 +106,19 @@ public class AirData {
 	
     }
     public boolean isExistData() {
+    	ResultSet rs = null;   
     	String sql = "select exists (select * from air where ymDate='20180101') as success;";
     	Statement stmt = null;
-    	boolean exist = true;
+    	boolean exist=true ;
     	try {
     		stmt = conn.createStatement();
     		//if exist return 1; else return 0
-    		exist = stmt.execute(sql);
+    		
+    		rs = stmt.executeQuery(sql);
+    		if(rs.next()) {
+    			exist=rs.getBoolean("success");
+    		}
+    		
     	} catch(SQLException e) {
     		e.printStackTrace();	
     	} catch(Exception e) {
