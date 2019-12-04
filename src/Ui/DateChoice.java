@@ -29,14 +29,14 @@ public class DateChoice extends JFrame {
    public int month, date;
    
    DateChoice(){
-      setTitle("肄ㅻ낫諛뺤뒪");
+      setTitle("날짜선택");
       Container c = getContentPane();
       c.setLayout(new GridLayout(3, 1));
       JPanel jp = new JPanel();
       JPanel jp2 = new JPanel();
       JPanel jp3 = new JPanel();
-      JLabel mon = new JLabel(" �썡");
-      JLabel day = new JLabel(" �씪");
+      JLabel mon = new JLabel(" 월");
+      JLabel day = new JLabel(" 일");
       jp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 40));
       jp2.setLayout(new GridLayout(2, 1));
       jp3.setLayout(new FlowLayout());
@@ -44,7 +44,7 @@ public class DateChoice extends JFrame {
       jb.setPreferredSize(new Dimension(80, 27));
       JComboBox combo = new JComboBox(month1);
       combo2 = new JComboBox(date1);
-      JLabel lab = new JLabel("�궇吏쒕�� �엯�젰�븯�꽭�슂");
+      JLabel lab = new JLabel("날짜를 입력하세요");
       lab.setHorizontalAlignment (JLabel.CENTER);
       jp.add(combo);
       jp.add(mon);

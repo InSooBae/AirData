@@ -27,7 +27,7 @@ public class CompareResult extends JFrame {
 	double pm10avr = 10;
 	double pm25avr = 10;
 	CompareResult(double no2p, double o3p, double cop, double so2p, double pm10, double pm25){
-		setTitle("�� ���");
+		setTitle("비교 결과");
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
 
@@ -42,67 +42,67 @@ public class CompareResult extends JFrame {
 		jp4.setLayout(new BorderLayout());
 		jp5.setLayout(new BorderLayout());
 		
-		JLabel no2pC = new JLabel("no2p �񱳰�� :");
-		JLabel o3pC = new JLabel("o3p �񱳰�� :");
-		JLabel copC = new JLabel("cop �񱳰�� :");
-		JLabel so2pC = new JLabel("so2p �񱳰�� :");
-		JLabel pm10C = new JLabel("pm10 �񱳰�� :");
-		JLabel pm25C = new JLabel("pm25 �񱳰�� :"); // 
+		JLabel no2pC = new JLabel("no2p 비교 결과 :");
+		JLabel o3pC = new JLabel("o3p 비교 결과 :");
+		JLabel copC = new JLabel("cop 비교 결과  :");
+		JLabel so2pC = new JLabel("so2p 비교 결과  :");
+		JLabel pm10C = new JLabel("pm10 비교 결과  :");
+		JLabel pm25C = new JLabel("pm25 비교 결과 :"); // 
 		System.out.println(no2pavr);
 		
 		jp1.add(no2pC);
-		jp2.add(new JLabel("�Է��� �� "+ no2p+"�� 2018�� ��� "+ no2pavr));
+		jp2.add(new JLabel("입력한 값 "+ no2p+"와 2018년의 평균 "+ no2pavr));
 		if(no2p>no2pavr)
-			jp3.add(new JLabel("2018���� �� �����մϴ�."));
+			jp3.add(new JLabel("2018년이 더 깨끗합니다."));
 		else if(no2p<no2pavr)
-			jp3.add(new JLabel("2018�⺸�� �����մϴ�."));
+			jp3.add(new JLabel("2018년보다 깨끗합니다."));
 		else
-			jp3.add(new JLabel("2018���  �Ȱ����ϴ�."));
+			jp3.add(new JLabel("2018년과 똑같습니다."));
 		
 		jp1.add(o3pC);
-		jp2.add(new JLabel("�Է��� �� "+ o3p+"�� 2018�� ��� "+ o3pavr));
+		jp2.add(new JLabel("입력한 값 "+ o3p+"와 2018년의 평균  "+ o3pavr));
 		if(o3p>o3pavr)
-			jp3.add(new JLabel("2018���� �� �����մϴ�."));
+			jp3.add(new JLabel("2018년이 더 깨끗합니다."));
 		else if(o3p<o3pavr)
-			jp3.add(new JLabel("2018�⺸�� �����մϴ�."));
+			jp3.add(new JLabel("2018년보다 깨끗합니다."));
 		else
-			jp3.add(new JLabel("2018���  �Ȱ����ϴ�."));
+			jp3.add(new JLabel("2018년과 똑같습니다."));
 		
 		jp1.add(copC);
-		jp2.add(new JLabel("�Է��� �� "+ cop+"�� 2018�� ��� "+ copavr));
+		jp2.add(new JLabel("입력한 값"+ cop+"와 2018년의 평균 "+ copavr));
 		if(cop>copavr)
-			jp3.add(new JLabel("2018���� �� �����մϴ�."));
+			jp3.add(new JLabel("2018년이 더 깨끗합니다."));
 		else if(cop<copavr)
-			jp3.add(new JLabel("2018�⺸�� �����մϴ�."));
+			jp3.add(new JLabel("2018년보다 깨끗합니다."));
 		else
-			jp3.add(new JLabel("2018���  �Ȱ����ϴ�."));
+			jp3.add(new JLabel("2018년과 똑같습니다."));
 		
 		jp1.add(so2pC);
-		jp2.add(new JLabel("�Է��� �� "+ so2p+"�� 2018�� ��� "+ so2pavr));
+		jp2.add(new JLabel("입력한 값 "+ so2p+"와 2018년의 평균 "+ so2pavr));
 		if(so2p>so2pavr)
-			jp3.add(new JLabel("2018���� �� �����մϴ�."));
+			jp3.add(new JLabel("2018년이 더 깨끗합니다."));
 		else if(so2p<so2pavr)
-			jp3.add(new JLabel("2018�⺸�� �����մϴ�."));
+			jp3.add(new JLabel("2018년보다 깨끗합니다."));
 		else
-			jp3.add(new JLabel("2018���  �Ȱ����ϴ�."));
+			jp3.add(new JLabel("2018년과 똑같습니다."));
 		
 		jp1.add(pm10C);
-		jp2.add(new JLabel("�Է��� �� "+ pm10+"�� 2018�� ��� "+ pm10avr));
+		jp2.add(new JLabel("입력한 값 "+ pm10+"와 2018년의 평균 "+ pm10avr));
 		if(pm10>pm10avr)
-			jp3.add(new JLabel("2018���� �� �����մϴ�."));
+			jp3.add(new JLabel("2018년이 더 깨끗합니다."));
 		else if(pm10<pm10avr)
-			jp3.add(new JLabel("2018�⺸�� �����մϴ�."));
+			jp3.add(new JLabel("2018년보다 깨끗합니다."));
 		else
-			jp3.add(new JLabel("2018���  �Ȱ����ϴ�."));
+			jp3.add(new JLabel("2018년과 똑같습니다."));
 		
 		jp1.add(pm25C);
-		jp2.add(new JLabel("�Է��� �� "+ pm25+"�� 2018�� ��� "+ pm25avr));
+		jp2.add(new JLabel("입력한 값 "+ pm25+"와 2018년의 평균 "+ pm25avr));
 		if(pm25>pm25avr)
-			jp3.add(new JLabel("2018���� �� �����մϴ�."));
+			jp3.add(new JLabel("2018년이 더 깨끗합니다."));
 		else if(pm25<pm25avr)
-			jp3.add(new JLabel("2018�⺸�� �����մϴ�."));
+			jp3.add(new JLabel("2018년보다 깨끗합니다."));
 		else
-			jp3.add(new JLabel("2018���  �Ȱ����ϴ�."));
+			jp3.add(new JLabel("2018년과 똑같습니다."));
 		
 		jp4.add(jp2, BorderLayout.WEST);
 		jp5.add(jp4, BorderLayout.WEST);
