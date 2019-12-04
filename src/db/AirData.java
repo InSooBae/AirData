@@ -60,6 +60,30 @@ public class AirData {
         }
        
     }
+    
+    //데이터베이스 생성 
+    public void createDatabase() {
+    	Statement stmt = null;
+    	String sql = null;
+    	
+    	try {
+    		stmt = conn.createStatement();
+		
+		
+		
+		sql="CREATE DATABASE IF NOT EXISTS airdata;";
+		
+		//테이블 생성, 수정 ,삭제 등 db관리 명령어에 사용
+		stmt.execute(sql);
+		
+    	} catch(SQLException e) {
+    		e.printStackTrace();	
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+	
+    
+    }
 
     public void createTable() {
     	Statement stmt = null;
@@ -216,7 +240,7 @@ public class AirData {
     		//Statement 생성후 실행할 쿼리 정보 등록.
     		stmt=conn.createStatement();
     		//결과를 담을 ResultSet 생성 후 결과 담음.
-    		ResultSet rs =stmt.executeQuery(sql);
+    		ResultSet rs = stmt.executeQuery(sql);
     		
     		
     		
@@ -234,13 +258,71 @@ public class AirData {
     		}
     		
     		
-    		
     	} catch(SQLException e) {
     		e.printStackTrace();
     	}
     	return list;
     }
-    //%로(마지막 OO로 끝나는 지역 안나옴) 
+    
+    //월별 각 공기별 평균값
+    public List<Air> getMonthAirAvg() {
+    	String sql=null;
+    	Statement stmt = null;
+    	List<Air> list = new ArrayList<Air>();
+    	
+    	for(int ymDate=201801; ymDate<201813;ymDate++) {
+    	try {
+    		Air air = new Air();
+    		StringBuilder sb = new StringBuilder();
+    		
+    		sql=sb.append("select avg(no2p),avg(o3p),avg(cop),avg(so2p),avg(pm10),avg(pm25) from air where not loc_name like '%로' and ymDate like ")
+    				.append("'"+ymDate+"%';").toString();
+    		
+    		stmt=conn.createStatement();
+    		ResultSet rs =stmt.executeQuery(sql);
+    		
+    		air.setNo2p(rs.getDouble("no2p"));
+    		air.setO3p(rs.getDouble("o3p"));
+    		air.setCop(rs.getDouble("cop"));
+    		air.setSo2p(rs.getDouble("so2p"));
+    		air.setPm10(rs.getInt("pm10"));
+    		air.setPm25(rs.getInt("pm25"));
+    		
+    		list.add(air);
+    		
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	}
+    	return list;
+    	
+    }
+    
+    //연평균 공기 데이터
+    public Air getYearAirAvg() {
+    	String sql =null;
+    	Statement stmt = null;
+    	Air air = new Air();
+    	try {
+    		sql="select avg(no2p),avg(o3p),avg(cop),avg(so2p),avg(pm10),avg(pm25) from air where not loc_name like '%로' ;";
+    		stmt=conn.createStatement();
+    		ResultSet rs = stmt.executeQuery(sql);
+    		
+    		
+    		air.setNo2p(rs.getDouble("no2p"));
+    		air.setO3p(rs.getDouble("o3p"));
+    		air.setCop(rs.getDouble("cop"));
+    		air.setSo2p(rs.getDouble("so2p"));
+    		air.setPm10(rs.getInt("pm10"));
+    		air.setPm25(rs.getInt("pm25"));
+    	}
+    	catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return air;
+    }
+    
+    //%로(마지막 OO구로만 끝나는 지역 나옴) 
     public List<Air> getSelectYMData(String ymDate) {
     	String sql =null;
     	Statement stmt = null;
@@ -251,7 +333,7 @@ public class AirData {
     		StringBuilder sb = new StringBuilder();
     		sql=sb.append("SELECT * FROM air WHERE ymDate=")
     		.append(ymDate)
-    		.append(" AND NOT loc_name LIKE '%로' ")
+    		.append(" AND loc_name LIKE '%구'")
     		.append(";").toString();
     		stmt=conn.createStatement();
     		ResultSet rs =stmt.executeQuery(sql);
@@ -268,6 +350,7 @@ public class AirData {
     			air.setPm25(rs.getInt("pm25"));
     			air.setX(POSITION[0][count]);
     			air.setY(POSITION[1][count++]);
+    			
     			list.add(air);
     		}
     	} catch(SQLException e) {
@@ -299,6 +382,10 @@ public class AirData {
 //    Date d = Date.valueOf(transDate);
 //     
 //    return d;
+		
+		
+		
+//   
 //}
 
 	
