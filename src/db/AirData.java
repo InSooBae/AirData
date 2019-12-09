@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import webParse.AirParse;
+
 
 
 
@@ -20,7 +22,7 @@ public class AirData {
 	//USERNAME
     private static final String USERNAME = "root";
     //PW
-    private static final String PASSWORD = "qodlstn12";
+    private static final String PASSWORD = "a12a123";
     // mysql은 "jdbc:mysql://localhost/사용할db이름" 이다.
     private static final String URL = "jdbc:mysql://localhost/airdata?useSSL=false&&serverTimezone=UTC";
     //gui 좌표
@@ -59,6 +61,30 @@ public class AirData {
             System.out.println("에러: " + e);
         }
        
+    }
+    
+    //데이터베이스 생성 
+    public void createDatabase() {
+    	Statement stmt = null;
+    	String sql = null;
+    	
+    	try {
+    		stmt = conn.createStatement();
+		
+		
+		
+		sql="CREATE DATABASE IF NOT EXISTS airdata;";
+		
+		//테이블 생성, 수정 ,삭제 등 db관리 명령어에 사용
+		stmt.execute(sql);
+		
+    	} catch(SQLException e) {
+    		e.printStackTrace();	
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+	
+    
     }
 
     public void createTable() {
@@ -105,20 +131,20 @@ public class AirData {
     	}
 	
     }
-    public boolean isExistData() {
-    	ResultSet rs = null;   
-    	String sql = "select exists (select * from air where ymDate='20180101') as success;";
+    public boolean isExistData(String ymDate,String loc_name) {
+    	String sql =null;
     	Statement stmt = null;
-    	boolean exist=true ;
+    	StringBuilder sb = new StringBuilder();
+    	ResultSet rs = null;
+    	sql=sb.append("select exists (select * from air where ymDate='").append(ymDate).append("' and loc_name='").append(loc_name).append("' ) as success;").toString();
+    	boolean exist = true;
     	try {
     		stmt = conn.createStatement();
     		//if exist return 1; else return 0
-    		
     		rs = stmt.executeQuery(sql);
     		if(rs.next()) {
-    			exist=rs.getBoolean("success");
+    		exist=rs.getBoolean(1);
     		}
-    		
     	} catch(SQLException e) {
     		e.printStackTrace();	
     	} catch(Exception e) {
@@ -126,8 +152,94 @@ public class AirData {
     	}
     	return exist;
     }
+    
+    public void insertWebData(String month,String day) {
+    	 String sql = "insert into air(ymDate,loc_name,no2p,o3p,cop,so2p,pm10,pm25) values(?,?,?,?,?,?,?,?)";
+         //쿼리 실행시 단계 1)쿼리 문장 분석 -> 2)컴파일 -> 3)실행
+         //Statement를 사용하면 매번 쿼리 수행할때 마다 위 3단계를 거치고(한번 이용할시)
+         //PreparedStatement 이용시 처음 한번만 3단계 거친후 캐시에 담아 재사용함.(동일한 쿼리 반복적 수행시 좋음) 
+         PreparedStatement pstmt = null;
+         AirParse airParse = new AirParse();
+       
+         List<List<String>> a=airParse.getWebData(month, day);
+         
+         try {
+      	   for(List<String> tmp:a) {
+      		   
+      		   int c=tmp.size();
+      		   String tp;
+      		   String t=(String)tmp.get(0);
+      		   tp=t;
+      		   pstmt = conn.prepareStatement(sql);
+
+      		   if(isExistData(tmp.get(0),tmp.get(1))==false) {
+             
+      		   if(c<8) {
+      			   for(int l=c;l<8;l++)
+      				   tmp.add("");
+      		   }
+           
+                 pstmt.setString(1,tp);
+                 pstmt.setString(2,tmp.get(1));
+                 
+                 if(!((String)tmp.get(5)).equals("")) {
+                 float temp3 = Float.parseFloat((String)tmp.get(5));
+                 pstmt.setFloat(3, (float) temp3);
+                 }  else
+                  pstmt.setNull(3, java.sql.Types.INTEGER);
+                 
+                 if(!((String)tmp.get(4)).equals("")) {
+                 float temp4 = Float.parseFloat((String)tmp.get(4));
+                 pstmt.setFloat(4,(float) temp4 );
+                 }  else
+                  pstmt.setNull(4, java.sql.Types.INTEGER);
+                 
+                 if(!((String)tmp.get(6)).equals("")) {
+                 float temp5 = Float.parseFloat((String)tmp.get(6));
+                 pstmt.setFloat(5, (float) temp5);
+                 }  else
+                  pstmt.setNull(5, java.sql.Types.INTEGER);
+                 
+                 if(!((String)tmp.get(7)).equals("")) {
+                 float temp6 = Float.parseFloat((String)tmp.get(7));
+                 pstmt.setFloat(6, (float) temp6);
+                 } else
+                  pstmt.setNull(6, java.sql.Types.INTEGER);
+                 
+                 if(!((String)tmp.get(2)).equals("")) {
+                 int temp7 = Integer.parseInt((String)tmp.get(2));
+                 pstmt.setInt(7, (int) temp7);
+                 }  else
+                  pstmt.setNull(7, java.sql.Types.INTEGER);
+                 
+                 if(!((String)tmp.get(3)).equals("")) {
+                 int temp8 = Integer.parseInt((String)tmp.get(3));
+                 pstmt.setInt(8, (int) temp8);
+                 } else
+                  pstmt.setNull(8, java.sql.Types.INTEGER);
+             
+                 //레코드 삽입,수정,삭제 등 DB관리 명령어에 사용
+                 pstmt.executeUpdate();
+                
+      		   }
+             }
+         } catch (SQLException e) {
+             // TODO Auto-generated catch block
+             e.printStackTrace();
+         } finally {
+             try {
+                 if (pstmt != null && !pstmt.isClosed())
+                     pstmt.close();
+             } catch (SQLException e) {
+                 // TODO Auto-generated catch block
+                 e.printStackTrace();
+             }
+         }
+         
+    }
+    
     public void insertAirData() {
-    	if(isExistData()==false) {
+    	
        String sql = "insert into air(ymDate,loc_name,no2p,o3p,cop,so2p,pm10,pm25) values(?,?,?,?,?,?,?,?)";
        //쿼리 실행시 단계 1)쿼리 문장 분석 -> 2)컴파일 -> 3)실행
        //Statement를 사용하면 매번 쿼리 수행할때 마다 위 3단계를 거치고(한번 이용할시)
@@ -139,7 +251,7 @@ public class AirData {
        
        try {
     	   for(List<String> tmp:a) {
-           
+    		   if(isExistData(tmp.get(0),tmp.get(1))==false) {
     		   int c=tmp.size();
     		   String tp;
     		   String t=(String)tmp.get(0);
@@ -194,7 +306,8 @@ public class AirData {
            
                //레코드 삽입,수정,삭제 등 DB관리 명령어에 사용
                pstmt.executeUpdate();
-       
+              
+    	    	}
            }
        } catch (SQLException e) {
            // TODO Auto-generated catch block
@@ -208,8 +321,7 @@ public class AirData {
                e.printStackTrace();
            }
        }
-       System.out.println("FIN");
-    	}
+       
     }
 
     public List<Air> getAllAirData() {
@@ -222,7 +334,7 @@ public class AirData {
     		//Statement 생성후 실행할 쿼리 정보 등록.
     		stmt=conn.createStatement();
     		//결과를 담을 ResultSet 생성 후 결과 담음.
-    		ResultSet rs =stmt.executeQuery(sql);
+    		ResultSet rs = stmt.executeQuery(sql);
     		
     		
     		
@@ -240,13 +352,72 @@ public class AirData {
     		}
     		
     		
-    		
     	} catch(SQLException e) {
     		e.printStackTrace();
     	}
     	return list;
     }
-    //%로(마지막 OO로 끝나는 지역 안나옴) 
+    
+    //월별 각 공기별 평균값
+    public List<Air> getMonthAirAvg() {
+    	String sql=null;
+    	Statement stmt = null;
+    	List<Air> list = new ArrayList<Air>();
+    	
+    	for(int ymDate=201801; ymDate<201813;ymDate++) {
+    	try {
+    		Air air = new Air();
+    		StringBuilder sb = new StringBuilder();
+    		
+    		sql=sb.append("select avg(no2p),avg(o3p),avg(cop),avg(so2p),avg(pm10),avg(pm25) from air where not loc_name like '%로' and ymDate like ")
+    				.append("'"+ymDate+"%';").toString();
+    		
+    		stmt=conn.createStatement();
+    		ResultSet rs =stmt.executeQuery(sql);
+    		
+    		air.setNo2p(rs.getDouble("no2p"));
+    		air.setO3p(rs.getDouble("o3p"));
+    		air.setCop(rs.getDouble("cop"));
+    		air.setSo2p(rs.getDouble("so2p"));
+    		air.setPm10(rs.getInt("pm10"));
+    		air.setPm25(rs.getInt("pm25"));
+    		
+    		list.add(air);
+    		
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	}
+    	return list;
+    	
+    }
+    
+    //연평균 공기 데이터
+    public Air getYearAirAvg() {
+    	String sql =null;
+    	Statement stmt = null;
+    	Air air = new Air();
+    	try {
+    		sql="select avg(no2p),avg(o3p),avg(cop),avg(so2p),avg(pm10),avg(pm25) from air where not loc_name like '%로' ;";
+    		stmt=conn.createStatement();
+    		ResultSet rs = stmt.executeQuery(sql);
+    		
+    		if(rs.next()) {
+    		air.setNo2p(rs.getDouble("no2p"));
+    		air.setO3p(rs.getDouble("o3p"));
+    		air.setCop(rs.getDouble("cop"));
+    		air.setSo2p(rs.getDouble("so2p"));
+    		air.setPm10(rs.getInt("pm10"));
+    		air.setPm25(rs.getInt("pm25"));
+    		}
+    	}
+    	catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return air;
+    }
+    
+    //%로(마지막 OO구로만 끝나는 지역 나옴) 
     public List<Air> getSelectYMData(String ymDate) {
     	String sql =null;
     	Statement stmt = null;
@@ -257,7 +428,7 @@ public class AirData {
     		StringBuilder sb = new StringBuilder();
     		sql=sb.append("SELECT * FROM air WHERE ymDate=")
     		.append(ymDate)
-    		.append(" AND NOT loc_name LIKE '%로' ")
+    		.append(" AND loc_name LIKE '%구'")
     		.append(";").toString();
     		stmt=conn.createStatement();
     		ResultSet rs =stmt.executeQuery(sql);
@@ -274,6 +445,7 @@ public class AirData {
     			air.setPm25(rs.getInt("pm25"));
     			air.setX(POSITION[0][count]);
     			air.setY(POSITION[1][count++]);
+    			
     			list.add(air);
     		}
     	} catch(SQLException e) {
@@ -305,6 +477,10 @@ public class AirData {
 //    Date d = Date.valueOf(transDate);
 //     
 //    return d;
+		
+		
+		
+//   
 //}
 
 	
