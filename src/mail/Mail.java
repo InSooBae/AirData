@@ -8,7 +8,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
 public class Mail {
     static String FROM = "freeuser123@nate.com";
     static String SENDERNAME = "고급객체9조";
@@ -23,9 +22,11 @@ public class Mail {
     static String TO = "";
     static String CONTENT = "";
    
-    public Mail(String mailaddr, String testStr) throws Exception {
+    public Mail(int index_month, int index_day, int index_loc, String mailaddr, String testStr) throws Exception {
     	TO = mailaddr;
-    	CONTENT = testStr;
+    	MailContent mailcontent = new MailContent();
+    	
+    	CONTENT = mailcontent.MailContent(index_month, index_day, index_loc);
         Properties props = System.getProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.port", PORT); 
@@ -54,6 +55,8 @@ public class Mail {
             transport.close();
         }
     }
+
+
 
 
 }

@@ -45,4 +45,11 @@ public class Csv {
         }
         return ret;
     }
+    public static void main(String[] args) {
+    	Csv a = new Csv();
+    	List<List<String>> b =a.getCSV();
+    	for(List<String> c:b) {
+    		System.out.println(c);
+    	}
+    }
 }

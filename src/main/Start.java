@@ -2,9 +2,9 @@ package main;
 
 import Ui.Main;
 
-public class main {
+public class Start {
 
 	public static void main(String[] args) {
-		Main mainview = new Main();
+		new Main();
 	}
 }
