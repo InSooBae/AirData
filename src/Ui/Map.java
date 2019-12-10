@@ -34,10 +34,17 @@ public class Map extends JFrame {
    String imageurlYellow = "resource/yellowcircle.png";
    String imageurlRed = "resource/redcircle.png";
    String imageurlMap = "resource/map.png";
+<<<<<<< HEAD
    String imageurlNoData = "resource/noData.png";
    JButton[] buttons = new JButton[25];
    int[] color = new int[25];
    int i = 0;
+=======
+   JButton[] buttons = new JButton[25];
+   int[] color = new int[25];
+   int i = 0;
+	
+>>>>>>> refs/remotes/origin/master
    
    Map(List<Air> airList, String month, String date){
       
@@ -83,6 +90,7 @@ public class Map extends JFrame {
        JButton getWebData = new JButton("정보 받아오기");
        
       
+<<<<<<< HEAD
       if(!airList.isEmpty()) {
 	      for (Air a : airList) {
 	         Cai cai = new Cai(a);
@@ -92,6 +100,17 @@ public class Map extends JFrame {
 	         imagepanel.add(buttons[i]);
 	         i++;
 	      }
+=======
+      for (Air a : airList) {
+         
+         Cai cai = new Cai(a);
+         
+         x = a.getX();
+         y = a.getY();
+         buttons[i] = setJButton(cai, a, month, date, x, y, cai.getCAI(), i);
+         imagepanel.add(buttons[i]);
+		 i++;  
+>>>>>>> refs/remotes/origin/master
       }
       
       setSize(800, 700);
@@ -112,6 +131,7 @@ public class Map extends JFrame {
       add(top, BorderLayout.NORTH);
       add(west, BorderLayout.WEST);
       add(south, BorderLayout.SOUTH);
+<<<<<<< HEAD
       if(airList.isEmpty()) {
     	  JOptionPane.showMessageDialog(this, "입력할 정보가 없습니다. 우측 하단의 정보를 받아보세요.", "정보", JOptionPane.INFORMATION_MESSAGE);
       }
@@ -216,6 +236,72 @@ public class Map extends JFrame {
          });   
    }
    
+=======
+      
+      
+      jck1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==1)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==1)
+							buttons[b].setVisible(false);
+						}
+					}
+			});
+		jck2.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==2)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==2)
+							buttons[b].setVisible(false);
+						}
+					}
+			});	
+		jck3.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==1){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==3)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==3)
+							buttons[b].setVisible(false);
+						}
+					}
+			});	
+		jck4.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==4){
+					for(int a = 0; a<25; a++) {
+						if(color[a]==1)
+							buttons[a].setVisible(true);
+						}
+					}
+				else
+					for(int b = 0; b<25; b++) {
+						if(color[b]==4)
+							buttons[b].setVisible(false);
+						}
+					}
+			});	
+	}
+
+>>>>>>> refs/remotes/origin/master
    public ImageIcon setImageIcon(int CAI, int i){
       String imageurl;
       Image originimg = null;
@@ -223,26 +309,45 @@ public class Map extends JFrame {
       ImageIcon changeicon;
       
       if( 0 < CAI && CAI <= 50) {
+<<<<<<< HEAD
+=======
+         imageurl = imageurlGreen;
+         color[i]=1;
+      }
+      else if(50 < CAI && CAI <= 100) {
+>>>>>>> refs/remotes/origin/master
          imageurl = imageurlBlue;
+<<<<<<< HEAD
          color[i]=1;
       }
       else if(50 < CAI && CAI <= 100) {
          imageurl = imageurlGreen;
+=======
+>>>>>>> refs/remotes/origin/master
          color[i]=2;
       }
       else if(100 < CAI && CAI <= 250) {
          imageurl = imageurlYellow;
+<<<<<<< HEAD
          color[i]=3;
       }
       else if(250<CAI) {
+=======
+         color[i]=3;  
+      }
+      else {
+>>>>>>> refs/remotes/origin/master
          imageurl = imageurlRed;
          color[i]=4;
       }
+<<<<<<< HEAD
       else {
          imageurl = imageurlNoData;
          color[i]=5;
       }
       
+=======
+>>>>>>> refs/remotes/origin/master
       ImageIcon origin = new ImageIcon(imageurl);
       originimg = origin.getImage();
       changeimg = originimg.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -252,7 +357,11 @@ public class Map extends JFrame {
    }
    
    
+<<<<<<< HEAD
    public JButton setJButton(List<Air> airList, Cai cai, Air a, String month, String date, int x, int y, int CAI, int i) {
+=======
+   public JButton setJButton(Cai cai, Air a, String month, String date, int x, int y, int CAI, int i) {
+>>>>>>> refs/remotes/origin/master
       
       JButton setbtn = new JButton(setImageIcon(CAI, i));
       setbtn.setBounds(x, y, 40, 40);
