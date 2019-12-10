@@ -131,39 +131,20 @@ public class AirData {
     	}
 	
     }
-<<<<<<< HEAD
     public boolean isExistData(String ymDate,String loc_name) {
     	String sql =null;
-=======
-    public boolean isExistData() {
-    	ResultSet rs = null;   
-    	String sql = "select exists (select * from air where ymDate='20180101') as success;";
->>>>>>> refs/remotes/origin/master
     	Statement stmt = null;
-<<<<<<< HEAD
     	StringBuilder sb = new StringBuilder();
     	ResultSet rs = null;
     	sql=sb.append("select exists (select * from air where ymDate='").append(ymDate).append("' and loc_name='").append(loc_name).append("' ) as success;").toString();
     	boolean exist = true;
-=======
-    	boolean exist=true ;
->>>>>>> refs/remotes/origin/master
     	try {
     		stmt = conn.createStatement();
     		//if exist return 1; else return 0
-<<<<<<< HEAD
     		rs = stmt.executeQuery(sql);
     		if(rs.next()) {
     		exist=rs.getBoolean(1);
     		}
-=======
-    		
-    		rs = stmt.executeQuery(sql);
-    		if(rs.next()) {
-    			exist=rs.getBoolean("success");
-    		}
-    		
->>>>>>> refs/remotes/origin/master
     	} catch(SQLException e) {
     		e.printStackTrace();	
     	} catch(Exception e) {

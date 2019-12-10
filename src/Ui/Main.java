@@ -58,7 +58,6 @@ public class Main extends JFrame {
       };
       emailbutton.addActionListener(emailbuttonListener);
 
-<<<<<<< HEAD
      
       daybutton.addActionListener(new ActionListener() {
           
@@ -77,30 +76,6 @@ public class Main extends JFrame {
        });
        
        monthbutton.addActionListener(new ActionListener() {
-=======
-		comparebutton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				Compare compare = new Compare();
-			}
-			
-		});
-		
-		p.add(daylabel);
-		p.add(daybutton);
-		p.add(comparelabel);
-		p.add(comparebutton);
-		p.add(monthlabel);
-		p.add(monthbutton);
-		p.add(emaillabel);
-		p.add(emailbutton);
-		add(p);
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500,400);
-		setVisible(true);
-	}
->>>>>>> refs/remotes/origin/master
 
           public void actionPerformed(ActionEvent e) {
              MonthGraph monthgraph = new MonthGraph();
