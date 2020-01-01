@@ -24,7 +24,7 @@ public class AirData {
     //PW
     private static final String PASSWORD = "qodlstn12";
     // mysql은 "jdbc:mysql://localhost/사용할db이름" 이다.
-    private static final String URL = "jdbc:mysql://localhost/airdata?useSSL=false&&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost/?useSSL=false&&serverTimezone=UTC";
     //gui 좌표
     private static final int[][] POSITION = {
             {385, 496, 328, 87, 242, 420, 115, 182, 405, 355, 375, 240, 196, 240, 320, 360, 333, 450, 127, 190, 285, 225, 285, 299, 427},
@@ -33,6 +33,7 @@ public class AirData {
     public AirData() {
     	// Connection 객체를 자동완성으로 import할 때는 com.mysql.connection이 아닌
         // java 표준인 java.sql.Connection 클래스를 import해야 한다.
+       Statement stmt = null;
        
 
     	try{
@@ -52,6 +53,13 @@ public class AirData {
             // @return Connection
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("연결 성공");
+            
+            stmt = conn.createStatement();
+            String createSql = "CREATE DATABASE IF NOT EXISTS airdata;";
+            String useSql = "use airdata;";
+
+            stmt.executeUpdate(createSql);
+            stmt.executeUpdate(useSql);
 
         }
         catch(ClassNotFoundException e){
