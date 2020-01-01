@@ -8,7 +8,7 @@
 - [x] Read CSV File and input at DB
 - [x] Calculate AirData to CAI
 - [x] Send select by ymDate of DB data
-- [x] When you have no data, you can retreve it from website.(http://cleanair.seoul.go.kr/air_pollution.htm?method=period)
+- [x] When you have no data, you can retireve it from website.(http://cleanair.seoul.go.kr/air_pollution.htm?method=period)
 
 ### Notice
 - First time you should install MYSQL.
