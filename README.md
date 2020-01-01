@@ -10,7 +10,7 @@
 - [x] Send select by ymDate of DB data
 
 ### Notice
-- First you have to install MYSQL.
+- First time you should install MYSQL.
 - You must include the external API in the resource directory of your JAVA Build path
 - DB does't have a sever.
 - I make this program assuming the DB server is open. So I recommend opening the server. And link with server.
