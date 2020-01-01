@@ -32,3 +32,6 @@
 - so2p		decimal(4,3)   YES	   		NULL
 - pm10		decimal(4)	   YES	   		NULL
 - pm25		decimal(4)	   YES	   		NULL
+
+### Current State
+![Alt text](resource/png.png "current state")
