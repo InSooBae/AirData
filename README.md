@@ -9,12 +9,15 @@
 - [x] Calculate AirData to CAI
 - [x] Send select by ymDate of DB data
 
+### Notice
+- First you have to install MYSQL.
+- You must include the external API in the resource directory of your JAVA Build path
+- DB does't have a sever.
+- I make this program assuming the DB server is open. So I recommend opening the server. And link with server.
 
 ## API Lists
 - mysql-connector-java-8.0.18.jar
 - mail-1.4.7.jar
-
-### departments
 
 
 ### air
